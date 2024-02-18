@@ -1,4 +1,5 @@
 import 'package:etrade_actions/features/shop/screens/home/home_screen.dart';
+import 'package:etrade_actions/features/shop/screens/store/store.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class NavigationController extends GetxController {
   Rx<int> selectedIndex = 0.obs;
   final screens = [
     const HomeScreen(),
-    Container(color: Colors.green),
+    const StoreScreen(),
     Container(color: Colors.blue),
     Container(color: Colors.yellow),
   ];
