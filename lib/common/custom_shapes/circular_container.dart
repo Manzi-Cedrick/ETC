@@ -1,3 +1,4 @@
+import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ICircularContainer extends StatelessWidget {
@@ -32,6 +33,9 @@ class ICircularContainer extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
+          border: Border.all(
+            color: TColors.darkGrey.withOpacity(0.5),
+          ),
           color: backgroundColor,
         ),
         child: child,

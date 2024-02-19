@@ -3,22 +3,26 @@ import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class TGridViewLayout extends StatelessWidget {
-  const TGridViewLayout({super.key});
+  const TGridViewLayout({super.key, required this.itemCount, this.mainAxisExtent = 296, required this.itemBuilder});
+
+  final int itemCount;
+  final double? mainAxisExtent;
+  final Widget? Function(BuildContext, int) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 6,
+      itemCount: itemCount,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: TSizes.gridViewSpacing,
         mainAxisSpacing: TSizes.gridViewSpacing,
-        mainAxisExtent: 296,
+        mainAxisExtent: mainAxisExtent,
       ),
-      itemBuilder: (context, index) => const TProductCartVertical(),
+      itemBuilder: itemBuilder,
     );
   }
 }
