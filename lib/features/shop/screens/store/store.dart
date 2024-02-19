@@ -3,6 +3,7 @@ import 'package:etrade_actions/common/custom_shapes/circular_container.dart';
 import 'package:etrade_actions/common/icon/circular_icon.dart';
 import 'package:etrade_actions/common/product/cart/cart_counter_menu.dart';
 import 'package:etrade_actions/common/product/cart/t_brand_title_text_with_vertical_icon.dart';
+import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TPromoSection.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSearchStore.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
@@ -36,7 +37,7 @@ class StoreScreen extends StatelessWidget {
               backgroundColor: THelperFunctions.isDarkMode(context) ? TColors.black : TColors.white,
               expandedHeight: 440,
               flexibleSpace: Padding(
-                padding: const EdgeInsets.all(TSizes.sm),
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
                 child: ListView(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -45,7 +46,7 @@ class StoreScreen extends StatelessWidget {
                       displayText: 'Search in store',
                       onTap: () {},
                       showBackground: false,
-                      padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+                      padding: EdgeInsets.zero,
                     ),
                     const SizedBox(height: TSizes.spaceBtwSections),
 
@@ -53,31 +54,46 @@ class StoreScreen extends StatelessWidget {
                     TSectionHeading(title: 'Featured Brandings', showActionsButton: true, onButtonPressed: () {}),
                     const SizedBox(height: TSizes.spaceBtwItems / 1.5),
 
-                    ICircularContainer(
-                      padding: const EdgeInsets.all(TSizes.md),
-                      backgroundColor: Colors.transparent,
-                      child: Row(
-                        children: [
-                          TPromoSection(
-                            isNetworkImage: false,
-                            radius: 10,
-                            image: TImages.clothIcon,
-                            onTap: () {},
-                          ),
-                          const SizedBox(width: TSizes.spaceBtwItems / 2),
-                          Column(
-                            children: [
-                              const TBrandTitleWithVerificationIcon(
-                                title: 'Nike',
-                                brandTextSize: TextSizes.large,
-                              ),
-                              Text('256 products', style: Theme.of(context).textTheme.labelMedium),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
+                    // Brandings
 
+                    TGridViewLayout(itemCount: 4, mainAxisExtent: 80, itemBuilder: (_, index) {
+                      return GestureDetector(
+                        onTap: () {},
+                        child: ICircularContainer(
+                          padding: const EdgeInsets.all(TSizes.defaultSpace),
+                          backgroundColor: Colors.transparent,
+                          radius: TSizes.sm,
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: TPromoSection(
+                                  isNetworkImage: false,
+                                  radius: 10,
+                                  width: 50,
+                                  height: 50,
+                                  image: TImages.clothIcon,
+                                  onTap: () {},
+                                ),
+                              ),
+                              const SizedBox(width: TSizes.spaceBtwItems / 2),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const TBrandTitleWithVerificationIcon(
+                                      title: 'Nike',
+                                      brandTextSize: TextSizes.large,
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    Text('256 products', style: Theme.of(context).textTheme.labelMedium),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
                   ],
                 )
               ),
