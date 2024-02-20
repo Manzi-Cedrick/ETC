@@ -1,4 +1,3 @@
-import 'package:etrade_actions/common/product/product_cards/product_card_vertical.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
