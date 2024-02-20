@@ -1,6 +1,5 @@
 import 'package:etrade_actions/common/appbar/appbar.dart';
 import 'package:etrade_actions/common/custom_shapes/circular_container.dart';
-import 'package:etrade_actions/common/icon/circular_icon.dart';
 import 'package:etrade_actions/common/product/cart/cart_counter_menu.dart';
 import 'package:etrade_actions/common/product/cart/t_brand_title_text_with_vertical_icon.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
