@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: SingleChildScrollView(
       child: Padding(
         padding: TSpacingStyle.paddingWithAppBarHeight,
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
             LoginForm(),
             // Divider
             DividerClass(dividerText: TTexts.orSignInWith),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            SizedBox(height: TSizes.spaceBtwItems),
             // Social Icons
             TSocialButtons()
           ],

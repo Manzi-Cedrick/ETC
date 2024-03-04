@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:etrade_actions/common/custom_shapes/circular_container.dart';
+import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
 import 'package:etrade_actions/features/shop/controllers/home_controller.dart';
-import 'package:etrade_actions/features/shop/screens/home/widgets/TPromoSection.dart';
+import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class TPromoSlider extends StatelessWidget {
             viewportFraction: 1,
             onPageChanged: (index, _) => controller.updatePageIndex(index),
           ),
-          items: banners.map((e) => TPromoSection(image: e, onTap: () {}, radius: TSizes.md,)).toList(),
+          items: banners.map((e) => TCircularContainerImage(image: e, onTap: () {}, radius: TSizes.md, height: 400, width: 600,)).toList(),
         ),
         const SizedBox(height: TSizes.spaceBtwItems - 10),
         Center(

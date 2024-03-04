@@ -1,4 +1,4 @@
-import 'package:etrade_actions/common/product/cart/t_brand_title.dart';
+import 'package:etrade_actions/common/widgets/product/cart/t_brand_title.dart';
 import 'package:etrade_actions/utils/constants/enums.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';

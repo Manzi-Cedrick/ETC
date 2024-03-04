@@ -3,7 +3,7 @@ import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingPage extends StatelessWidget {
-  OnBoardingPage(
+  const OnBoardingPage(
       {super.key,
       required this.image,
       required this.title,

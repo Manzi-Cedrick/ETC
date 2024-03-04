@@ -1,6 +1,6 @@
 
-import 'package:etrade_actions/common/appbar/appbar.dart';
-import 'package:etrade_actions/common/product/cart/cart_counter_menu.dart';
+import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
+import 'package:etrade_actions/common/widgets/product/cart/cart_counter_menu.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';

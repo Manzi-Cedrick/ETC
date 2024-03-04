@@ -14,7 +14,7 @@ class TProductTitleText extends StatelessWidget {
       title,
       maxLines: maxLines,
       overflow: overflow,
-      style: smallSize ? Theme.of(context).textTheme.labelLarge!.apply(color: color) : Theme.of(context).textTheme.titleSmall!.apply(color: color),  
+      style: smallSize ? Theme.of(context).textTheme.titleMedium!.apply(color: color) : Theme.of(context).textTheme.titleSmall!.apply(color: color),  
     );
   }
 }

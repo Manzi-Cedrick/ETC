@@ -3,8 +3,8 @@ import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
-class TVerticalImageText extends StatelessWidget {
-  const TVerticalImageText(
+class TVerticalCard extends StatelessWidget {
+  const TVerticalCard(
       {super.key,
       required this.image,
       required this.title,

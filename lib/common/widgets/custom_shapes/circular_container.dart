@@ -30,7 +30,7 @@ class ICircularContainer extends StatelessWidget {
         width: width,
         height: height,
         margin: margin,
-        padding: const EdgeInsets.all(0),
+        padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
           border: Border.all(

@@ -19,7 +19,8 @@ class THomeCategory extends StatelessWidget {
               title: 'Popular Categories', showActionsButton: false),
           SizedBox(height: TSizes.spaceBtwItems),
           // Categories
-          TListViewCategoryOption()
+          TListViewCategoryOption(),
+          SizedBox(height: TSizes.spaceBtwSections * 1.4),
         ],
       ),
     );

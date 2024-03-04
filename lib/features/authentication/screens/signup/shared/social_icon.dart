@@ -4,7 +4,7 @@ import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class TSocialButtons extends StatelessWidget {
-  TSocialButtons({super.key});
+  const TSocialButtons({super.key});
 
   @override
   Widget build(BuildContext context) {

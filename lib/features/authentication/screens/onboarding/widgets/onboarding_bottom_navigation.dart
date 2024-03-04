@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingBottomNavigation extends StatelessWidget {
-  OnBoardingBottomNavigation({super.key});
+  const OnBoardingBottomNavigation({super.key});
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
