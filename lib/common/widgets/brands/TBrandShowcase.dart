@@ -1,4 +1,4 @@
-import 'package:etrade_actions/common/widgets/brands/TBrandCard.dart';
+import 'package:etrade_actions/common/widgets/brands/TBrands.dart';
 import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
@@ -12,14 +12,14 @@ class TBrandCardShowcase extends StatelessWidget {
   final List<String> images;
   @override
   Widget build(BuildContext context) {
-    return ICircularContainer(
+    return TRoundedContainer(
       radius: TSizes.md,
       padding: const EdgeInsets.all(TSizes.sm),
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
       backgroundColor: Colors.transparent,
       child: Column(
         children: [
-          const TBrandCard(),
+          const TBrandCard(showBorder: true),
           Padding(
             padding: const EdgeInsets.symmetric(
                 vertical: TSizes.sm, horizontal: TSizes.md),
@@ -35,7 +35,7 @@ class TBrandCardShowcase extends StatelessWidget {
 
 Widget brandTopProductImageWidget(String image, context) {
   return Expanded(
-    child: ICircularContainer(
+    child: TRoundedContainer(
       height: 100,
       radius: TSizes.sm,
       backgroundColor: THelperFunctions.isDarkMode(context)
