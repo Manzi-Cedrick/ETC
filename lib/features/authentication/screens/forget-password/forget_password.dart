@@ -4,7 +4,6 @@ import 'package:etrade_actions/features/authentication/screens/reset-password/re
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/constants/text_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

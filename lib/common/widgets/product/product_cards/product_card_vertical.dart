@@ -1,7 +1,7 @@
-import 'package:etrade_actions/common/custom_shapes/circular_container.dart';
-import 'package:etrade_actions/common/icon/circular_icon.dart';
-import 'package:etrade_actions/common/texts/product_title_text.dart';
-import 'package:etrade_actions/features/shop/screens/home/widgets/TPromoSection.dart';
+import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
+import 'package:etrade_actions/common/widgets/icon/circular_icon.dart';
+import 'package:etrade_actions/common/widgets/texts/product_title_text.dart';
+import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/shadow.dart';
@@ -19,6 +19,7 @@ class TProductCartVertical extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
+        height: double.infinity,
         width: double.infinity,
         padding: const EdgeInsets.all(TSizes.sm),
         decoration: BoxDecoration(
@@ -30,13 +31,15 @@ class TProductCartVertical extends StatelessWidget {
           children: [
             ICircularContainer(
               backgroundColor: dark ? TColors.dark : TColors.light,
-              radius: TSizes.lg,
+              radius: TSizes.md,
               child: Stack(
                 children: [
-                  TPromoSection(
+                  TCircularContainerImage(
                     image: TImages.productImage1,
                     onTap: () {},
-                    height: 150,
+                    height: 140,
+                    width: 600,
+                    fit: BoxFit.contain,
                     radius: TSizes.sm,
                   ),
                   Positioned(
@@ -78,17 +81,20 @@ class TProductCartVertical extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            const SizedBox(height: TSizes.spaceBtwItems),
             Padding(
               padding: const EdgeInsets.only(left: TSizes.sm),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const TProductTitleText(
-                    title: 'Nike Jordan Low 1',
-                    smallSize: false,
+                    title: 'Green Nike Air Shoes',
+                    smallSize: true,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                    height: 6,
                   ),
                   Row(
                     children: [
@@ -98,7 +104,7 @@ class TProductCartVertical extends StatelessWidget {
                         maxLines: 1,
                         style: Theme.of(context)
                             .textTheme
-                            .titleSmall!
+                            .bodyMedium!
                             .apply(color: dark ? TColors.white : TColors.black),
                       ),
                       const SizedBox(
@@ -111,9 +117,7 @@ class TProductCartVertical extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
+                  const SizedBox(height: TSizes.spaceBtwItems),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

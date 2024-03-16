@@ -1,4 +1,4 @@
-import 'package:etrade_actions/common/product/product_cards/product_card_vertical.dart';
+import 'package:etrade_actions/common/widgets/product/product_cards/product_card_vertical.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/THomeAppBar.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/THomeCategory.dart';
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                     onButtonPressed: () {},
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  TGridViewLayout(itemCount: 6, itemBuilder: (_, index) {
+                  TGridViewLayout(itemCount: 6,mainAxisExtent: 280, itemBuilder: (_, index) {
                     return const TProductCartVertical();
                   })
                 ],

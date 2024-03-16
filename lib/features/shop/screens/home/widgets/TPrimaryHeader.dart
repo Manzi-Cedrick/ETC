@@ -1,5 +1,5 @@
-import 'package:etrade_actions/common/custom_shapes/circular_container.dart';
-import 'package:etrade_actions/common/custom_shapes/curved_edge_widget.dart';
+import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
+import 'package:etrade_actions/common/widgets/custom_shapes/curved_edge_widget.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
         color: TColors.primary,
         padding: const EdgeInsets.all(0),
         child: SizedBox(
-          height: 400,
+          // height: 400,
           child: Stack(
             children: [
               Positioned(

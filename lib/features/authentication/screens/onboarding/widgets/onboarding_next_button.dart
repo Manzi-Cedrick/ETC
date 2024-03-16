@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class OnBoardingButton extends StatelessWidget {
+  const OnBoardingButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);

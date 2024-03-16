@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SignupForm extends StatelessWidget {
-  SignupForm({super.key});
+  const SignupForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class SignupForm extends StatelessWidget {
                   labelText: TTexts.password),
             ),
             // Terms of Agreement
-            TTermsPolicy(),
+            const TTermsPolicy(),
             // Create Account
             const SizedBox(height: TSizes.spaceBtwSections),
             SizedBox(

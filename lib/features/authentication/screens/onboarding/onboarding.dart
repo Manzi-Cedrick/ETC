@@ -20,7 +20,7 @@ class OnBoardingScreen extends StatelessWidget {
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndicator,
-            children: [
+            children: const [
               OnBoardingPage(
                   image: TImages.onBoardingImage1,
                   title: TTexts.onBoardingTitle1,
@@ -35,9 +35,9 @@ class OnBoardingScreen extends StatelessWidget {
                   subTitle: TTexts.onBoardingSubTitle3)
             ],
           ),
-          OnBoardingSkip(),
-          OnBoardingBottomNavigation(),
-          OnBoardingButton()
+          const OnBoardingSkip(),
+          const OnBoardingBottomNavigation(),
+          const OnBoardingButton()
         ],
       ),
     );

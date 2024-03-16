@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DividerClass extends StatelessWidget {
-  DividerClass({super.key, required this.dividerText});
+  const DividerClass({super.key, required this.dividerText});
 
   final String dividerText;
   @override

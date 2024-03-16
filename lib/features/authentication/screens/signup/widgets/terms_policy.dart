@@ -4,7 +4,7 @@ import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TTermsPolicy extends StatelessWidget {
-  TTermsPolicy({super.key});
+  const TTermsPolicy({super.key});
 
   @override
   Widget build(BuildContext context) {

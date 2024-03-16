@@ -4,7 +4,7 @@ import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TFormHeader extends StatelessWidget {
-  TFormHeader({super.key, required this.title, required this.subTitle});
+  const TFormHeader({super.key, required this.title, required this.subTitle});
 
   final String title, subTitle;
   @override

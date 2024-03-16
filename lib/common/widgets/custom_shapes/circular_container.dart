@@ -1,45 +1,44 @@
 import 'package:etrade_actions/utils/constants/colors.dart';
+import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
-class ICircularContainer extends StatelessWidget {
-  const ICircularContainer({
+class TRoundedContainer extends StatelessWidget {
+  const TRoundedContainer({
     super.key,
     this.width,
     this.height,
-    this.backgroundColor,
     this.child,
     this.padding,
-    this.radius = 200.0,
     this.margin,
-    this.onTap,
+    this.radius = TSizes.cardRadiusLg,
+    this.showBorder = false,
+    this.backgroundColor = TColors.white,
+    this.borderColor = TColors.borderPrimary
+
   });
 
   final double? width;
   final double? height;
-  final Color? backgroundColor;
-  final Widget? child;
-  final EdgeInsetsGeometry? padding;
   final double radius;
+  final Widget? child;
+  final bool showBorder;
+  final Color backgroundColor;
+  final Color borderColor;
+  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
-  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
+    return Container(
         width: width,
         height: height,
         margin: margin,
-        padding: const EdgeInsets.all(0),
+        padding: padding,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius),
-          border: Border.all(
-            color: TColors.darkGrey.withOpacity(0.5),
-          ),
           color: backgroundColor,
+          borderRadius: BorderRadius.circular(radius),
+          border: showBorder ? Border.all(color: borderColor) : null
         ),
         child: child,
-      ),
     );
   }
 }

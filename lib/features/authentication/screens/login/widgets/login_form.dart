@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LoginForm extends StatelessWidget {
-  LoginForm({super.key});
+  const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {

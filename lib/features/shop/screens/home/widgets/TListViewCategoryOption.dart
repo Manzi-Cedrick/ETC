@@ -1,4 +1,4 @@
-import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularImageContainer.dart';
+import 'package:etrade_actions/features/shop/screens/home/widgets/TVerticalCard.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class TListViewCategoryOption extends StatelessWidget {
         itemCount: 6,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) => const TVerticalImageText(image: TImages.sportIcon, title: 'Shoes')
+        itemBuilder: (_, index) => const TVerticalCard(image: TImages.sportIcon, title: 'Shoes')
       ),
     );
   }
