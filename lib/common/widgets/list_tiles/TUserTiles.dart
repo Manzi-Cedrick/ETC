@@ -1,7 +1,9 @@
+import 'package:etrade_actions/features/personalization/screens/profile/profile.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TUserTiles extends StatelessWidget {
@@ -10,7 +12,7 @@ class TUserTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const TCircularContainerImage(
+      leading: const TRoundedImage(
         image: TImages.user,
         width: 50,
         height: 50,
@@ -29,7 +31,7 @@ class TUserTiles extends StatelessWidget {
               .bodyMedium!
               .apply(color: TColors.white)),
       trailing: IconButton(
-        onPressed: () {},
+        onPressed: () => Get.to(const ProfileScreen()),
         icon: const Icon(
           Iconsax.edit,
           color: TColors.white,
