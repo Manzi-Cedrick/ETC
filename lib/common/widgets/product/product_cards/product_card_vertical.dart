@@ -1,13 +1,15 @@
 import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
-import 'package:etrade_actions/common/widgets/icon/circular_icon.dart';
 import 'package:etrade_actions/common/widgets/texts/product_title_text.dart';
+import 'package:etrade_actions/common/widgets/icon/circular_icon.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
+import 'package:etrade_actions/features/shop/screens/product_details/product_detail.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/shadow.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TProductCartVertical extends StatelessWidget {
@@ -17,7 +19,7 @@ class TProductCartVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(const ProductDetail()),
       child: Container(
         height: double.infinity,
         width: double.infinity,
@@ -29,12 +31,12 @@ class TProductCartVertical extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ICircularContainer(
+            TRoundedContainer(
               backgroundColor: dark ? TColors.dark : TColors.light,
               radius: TSizes.md,
               child: Stack(
                 children: [
-                  TCircularContainerImage(
+                  TRoundedImage(
                     image: TImages.productImage1,
                     onTap: () {},
                     height: 140,
@@ -45,7 +47,7 @@ class TProductCartVertical extends StatelessWidget {
                   Positioned(
                     top: 10,
                     left: 10,
-                    child: ICircularContainer(
+                    child: TRoundedContainer(
                       radius: TSizes.sm,
                       backgroundColor: TColors.secondary.withOpacity(0.8),
                       child: Padding(
@@ -72,10 +74,8 @@ class TProductCartVertical extends StatelessWidget {
                             : TColors.light.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: TCircularButton(
-                          icon: Iconsax.heart5,
-                          onTap: () {},
-                          color: Colors.red),
+                      child:
+                          TCicularIcon(icon: Iconsax.heart5, color: Colors.red, onPressed: () {}, backgroundColor: TColors.white.withOpacity(0.5),),
                     ),
                   )
                 ],
