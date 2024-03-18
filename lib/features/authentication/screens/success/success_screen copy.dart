@@ -17,33 +17,35 @@ class SucessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: TSpacingStyle.paddingWithAppBarHeight,
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage(image),
-                width: THelperFunctions.screenWidth() * 0.5,
-              ),
-              const SizedBox(height: TSizes.spaceBtwSections),
-              Text(title,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center),
-              const SizedBox(height: TSizes.spaceBtwItems),
-              Text(subTitle,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center),
-              const SizedBox(height: TSizes.spaceBtwSections),
-              // Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  child: const Text(TTexts.tContinue),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: TSpacingStyle.paddingWithAppBarHeight,
+            child: Column(
+              children: [
+                Image(
+                  image: AssetImage(image),
+                  width: THelperFunctions.screenWidth() * 0.5,
                 ),
-              ),
-            ],
+                const SizedBox(height: TSizes.spaceBtwSections),
+                Text(title,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    textAlign: TextAlign.center),
+                const SizedBox(height: TSizes.spaceBtwItems),
+                Text(subTitle,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center),
+                const SizedBox(height: TSizes.spaceBtwSections),
+                // Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: onPressed,
+                    child: const Text(TTexts.tContinue),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
