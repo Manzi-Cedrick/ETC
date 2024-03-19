@@ -1,13 +1,15 @@
-import 'dart:ffi';
 
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TSettingsMenuTile.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TUserTiles.dart';
+import 'package:etrade_actions/features/personalization/screens/address/address.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TPrimaryHeader.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
+import 'package:etrade_actions/features/shop/screens/order/order.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -24,6 +26,7 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   TAppBar(
+                    showBackArrow: false,
                       title: Text('Account',
                           style: Theme.of(context)
                               .textTheme
@@ -44,18 +47,21 @@ class SettingsScreen extends StatelessWidget {
                     showActionsButton: false,
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  const TSettingsMenuTile(
+                  TSettingsMenuTile(
                       icon: Iconsax.safe_home,
                       title: 'My Addresses',
-                      subTitle: 'Set shopping delivery address'),
+                      subTitle: 'Set shopping delivery address',
+                      onTap: () => Get.to(const UserAddressScreen()),),
                   const TSettingsMenuTile(
                       icon: Iconsax.shopping_cart,
                       title: 'My Cart',
                       subTitle: 'Add, remove products and move to checkout'),
-                  const TSettingsMenuTile(
+                  TSettingsMenuTile(
                       icon: Iconsax.bag_tick,
                       title: 'My Orders',
-                      subTitle: 'In progress and Completed orders'),
+                      subTitle: 'In progress and Completed orders',
+                      onTap: () => Get.to(const OrderScreen()),
+                    ),
                   const TSettingsMenuTile(
                       icon: Iconsax.bank,
                       title: 'Bank Account',
@@ -95,11 +101,11 @@ class SettingsScreen extends StatelessWidget {
                       title: 'HD Image quality',
                       subTitle: 'Set Image quality to be seen',
                       trailing: Switch(value: true, onChanged: (value) {})),
-
                   const SizedBox(height: TSizes.spaceBtwSections),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton(onPressed: () {}, child: const Text('Logout')),
+                    child: OutlinedButton(
+                        onPressed: () {}, child: const Text('Logout')),
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections)
                 ],
