@@ -24,7 +24,7 @@ class TPromoSlider extends StatelessWidget {
             viewportFraction: 1,
             onPageChanged: (index, _) => controller.updatePageIndex(index),
           ),
-          items: banners.map((e) => TCircularContainerImage(image: e, onTap: () {}, radius: TSizes.md, height: 400, width: 600,)).toList(),
+          items: banners.map((e) => TRoundedImage(image: e, onTap: () {}, radius: TSizes.defaultSpace, height: 400, width: 600,)).toList(),
         ),
         const SizedBox(height: TSizes.spaceBtwItems - 10),
         Center(
@@ -33,7 +33,7 @@ class TPromoSlider extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 for (int i = 0; i < banners.length; i++)
-                  ICircularContainer(
+                  TRoundedContainer(
                     width: 20,
                     height: 4,
                     margin: const EdgeInsets.only(right: 10),

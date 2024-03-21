@@ -1,4 +1,5 @@
 import 'package:etrade_actions/common/widgets/product/product_cards/product_card_vertical.dart';
+import 'package:etrade_actions/features/shop/screens/all_products/all_products.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/THomeAppBar.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/THomeCategory.dart';
@@ -9,6 +10,7 @@ import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeadin
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -50,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   TSectionHeading(
                     title: 'Popular Products',
                     showActionsButton: true,
-                    onButtonPressed: () {},
+                    onButtonPressed: () => Get.to(() => const AllProducts()),
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
                   TGridViewLayout(itemCount: 6,mainAxisExtent: 280, itemBuilder: (_, index) {
