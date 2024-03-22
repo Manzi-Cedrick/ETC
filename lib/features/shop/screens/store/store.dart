@@ -1,8 +1,9 @@
+import 'package:etrade_actions/common/widgets/brands/TBrands.dart';
 import 'package:etrade_actions/common/widgets/tabs/TBottomTabBar.dart';
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
-import 'package:etrade_actions/common/widgets/brands/TBrands.dart';
 import 'package:etrade_actions/common/widgets/product/cart/cart_counter_menu.dart';
 import 'package:etrade_actions/common/widgets/tabs/TCategoryTab.dart';
+import 'package:etrade_actions/features/shop/screens/all_brands/all_brands.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSearchStore.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
@@ -10,6 +11,7 @@ import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -58,14 +60,14 @@ class StoreScreen extends StatelessWidget {
                           TSectionHeading(
                               title: 'Featured Brandings',
                               showActionsButton: true,
-                              onButtonPressed: () {}),
+                              onButtonPressed: () => Get.to(() => const AllBrands())),
                           const SizedBox(height: TSizes.spaceBtwItems / 1.5),
                           // Brandings
                           TGridViewLayout(
                             itemCount: 4,
                             mainAxisExtent: 80,
                             itemBuilder: (_, index) {
-                              return const TBrands();
+                              return const TBrandCard(showBorder: true);
                             },
                           ),
                         ],

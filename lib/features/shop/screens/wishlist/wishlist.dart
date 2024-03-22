@@ -18,8 +18,8 @@ class FavoriteScreen extends StatelessWidget {
         title:
             Text('Wishlist', style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          TCircularButton(
-              icon: Iconsax.add, onTap: () => Get.to(const HomeScreen()))
+          TCicularIcon(
+              icon: Iconsax.add, onPressed: () => Get.to(const HomeScreen()))
         ],
         showBackArrow: false,
       ),
