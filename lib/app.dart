@@ -1,4 +1,4 @@
-import 'package:etrade_actions/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:etrade_actions/utils/constants/text_strings.dart';
@@ -16,7 +16,12 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       // initialBinding: GeneralBindings(),
-      home: const OnBoardingScreen()
+      home: const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(color: TColors.white,),
+        ),
+        backgroundColor: TColors.primary,
+      ),
     );
   }
 }
