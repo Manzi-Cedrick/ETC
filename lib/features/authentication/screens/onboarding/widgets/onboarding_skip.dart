@@ -1,5 +1,5 @@
 
-import 'package:etrade_actions/features/authentication/controllers/onboarding.controller.dart';
+import 'package:etrade_actions/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:etrade_actions/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 
