@@ -1,8 +1,10 @@
+import 'package:etrade_actions/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:etrade_actions/features/authentication/screens/login/login.dart';
 import 'package:etrade_actions/features/authentication/screens/signup/widgets/terms_policy.dart';
 import 'package:etrade_actions/features/authentication/screens/verify-email/verify-email.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/constants/text_strings.dart';
+import 'package:etrade_actions/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -12,7 +14,9 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupController());
     return Form(
+      key: controller.signupFormKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
         child: Column(
@@ -21,6 +25,8 @@ class SignupForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
+                    controller: controller.firstName,
+                    validator: (value) => TValidator.validateEmptyText('First name', value),
                     expands: false,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Iconsax.user),
@@ -30,6 +36,8 @@ class SignupForm extends StatelessWidget {
                 const SizedBox(width: TSizes.spaceBtwItems),
                 Expanded(
                   child: TextFormField(
+                    controller: controller.lastName,
+                    validator: (value) => TValidator.validateEmptyText('Last name', value),
                     expands: false,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Iconsax.user),
@@ -41,12 +49,16 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
             TextFormField(
+              controller: controller.username,
+              validator: (value) => TValidator.validateEmptyText('Username', value),
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.user_edit),
                   labelText: TTexts.username),
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
             TextFormField(
+              controller: controller.email,
+              validator: (value) => TValidator.validateEmail(value),
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.direct), labelText: TTexts.email),
@@ -54,12 +66,16 @@ class SignupForm extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
             TextFormField(
               autofocus: true,
+              controller: controller.phoneNumber,
+              validator: (value) => TValidator.validatePhoneNumber(value),
               keyboardType: TextInputType.phone ,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.call), labelText: TTexts.phoneNo, ),
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
             TextFormField(
+              controller: controller.password,
+              validator: (value) => TValidator.validatePassword(value),
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.password_check),
                   labelText: TTexts.password),
@@ -71,7 +87,7 @@ class SignupForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () => Get.to(() => const VerifyEmailScreen()), child: const Text(TTexts.createAccount)),
+                  onPressed: () => controller.signup(), child: const Text(TTexts.createAccount)),
             ),
             const SizedBox(height: TSizes.spaceBtwItems),
             SizedBox(

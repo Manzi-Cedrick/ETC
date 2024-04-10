@@ -1,4 +1,4 @@
-import 'package:etrade_actions/features/authentication/controllers/onboarding.controller.dart';
+import 'package:etrade_actions/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:etrade_actions/features/authentication/screens/onboarding/widgets/onboarding_bottom_navigation.dart';
 import 'package:etrade_actions/features/authentication/screens/onboarding/widgets/onboarding_next_button.dart';
 import 'package:etrade_actions/features/authentication/screens/onboarding/widgets/onboarding_page_widget.dart';
