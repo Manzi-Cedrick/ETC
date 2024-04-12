@@ -1,3 +1,4 @@
+import 'package:etrade_actions/common/widgets/bindings/general_bindings.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -15,7 +16,7 @@ class App extends StatelessWidget {
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      // initialBinding: GeneralBindings(),
+      initialBinding: GeneralBindings(),
       home: const Scaffold(
         body: Center(
           child: CircularProgressIndicator(color: TColors.white,),
