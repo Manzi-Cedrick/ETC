@@ -1,3 +1,4 @@
+import 'package:etrade_actions/features/personalization/controllers/user_controller.dart';
 import 'package:etrade_actions/features/personalization/screens/profile/profile.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
@@ -11,6 +12,7 @@ class TUserTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return ListTile(
       leading: const TRoundedImage(
         image: TImages.user,
@@ -19,13 +21,13 @@ class TUserTiles extends StatelessWidget {
         padding: 0,
       ),
       title: Text(
-        'Manzi Cedrick',
+        controller.user.value.fullName,
         style: Theme.of(context)
             .textTheme
             .headlineSmall!
             .apply(color: TColors.white),
       ),
-      subtitle: Text('cedrickmanzii0@gmail.com',
+      subtitle: Text(controller.user.value.email,
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
