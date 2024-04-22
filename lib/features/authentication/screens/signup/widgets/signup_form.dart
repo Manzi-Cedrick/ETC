@@ -1,7 +1,5 @@
 import 'package:etrade_actions/features/authentication/controllers/signup/signup_controller.dart';
-import 'package:etrade_actions/features/authentication/screens/login/login.dart';
 import 'package:etrade_actions/features/authentication/screens/signup/widgets/terms_policy.dart';
-import 'package:etrade_actions/features/authentication/screens/verify-email/verify-email.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/constants/text_strings.dart';
 import 'package:etrade_actions/utils/validators/validation.dart';
@@ -73,12 +71,20 @@ class SignupForm extends StatelessWidget {
                   prefixIcon: Icon(Iconsax.call), labelText: TTexts.phoneNo, ),
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
-            TextFormField(
-              controller: controller.password,
-              validator: (value) => TValidator.validatePassword(value),
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Iconsax.password_check),
-                  labelText: TTexts.password),
+            Obx(
+              () => TextFormField(
+                controller: controller.password,
+                obscureText: controller.hidePassword.value,
+                validator: (value) => TValidator.validatePassword(value),
+                decoration: InputDecoration(
+                    prefixIcon: const Icon(Iconsax.password_check),
+                    suffixIcon: IconButton(
+                      onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
+                      icon: Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye),
+                    ),
+                    labelText: TTexts.password),
+                    
+              ),
             ),
             // Terms of Agreement
             const TTermsPolicy(),
