@@ -1,4 +1,6 @@
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
+import 'package:etrade_actions/features/personalization/controllers/user_controller.dart';
+import 'package:etrade_actions/features/personalization/screens/profile/change_name.dart';
 import 'package:etrade_actions/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
@@ -7,6 +9,7 @@ import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,6 +17,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -44,17 +48,17 @@ class ProfileScreen extends StatelessWidget {
                 const TSectionHeading(title: 'Profile Information', showActionsButton: false),
                 const SizedBox(height: TSizes.spaceBtwItems),
 
-                TProfileMenu(onPressed: () {}, title: 'Name', value: 'Manzi Cedrick'),
-                TProfileMenu(onPressed: () {}, title: 'Username', value: 'ManziCedrick01'),
+                TProfileMenu(onPressed: () => Get.to(() => const ChangeName()) , title: 'Name', value: controller.user.value.fullName),
+                TProfileMenu(onPressed: () {}, title: 'Username', value: controller.user.value.username),
 
                 const SizedBox(height: TSizes.spaceBtwItems / 2),
                 const Divider(),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 const TSectionHeading(title: 'Personal Information', showActionsButton: false),
                 const SizedBox(height: TSizes.spaceBtwItems),
-                TProfileMenu(onPressed: () {}, title: 'User ID', value: 'TY4561', icon: Iconsax.copy,),
-                TProfileMenu(onPressed: () {}, title: 'E-mail', value: 'cedrickmanzii0@gmail.com'),
-                TProfileMenu(onPressed: () {}, title: 'Phone Number', value: '+250-7809-183-790'),
+                TProfileMenu(onPressed: () {}, title: 'User ID', value: controller.user.value.id, icon: Iconsax.copy,),
+                TProfileMenu(onPressed: () {}, title: 'E-mail', value: controller.user.value.email),
+                TProfileMenu(onPressed: () {}, title: 'Phone Number', value: controller.user.value.phoneNumber),
                 TProfileMenu(onPressed: () {}, title: 'Gender', value: 'Male'),
                 TProfileMenu(onPressed: () {}, title: 'Date of Birth', value: '10 Oct, 2005'),
 
@@ -63,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
 
                 Center(
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => controller.deleteAccountWarningPopup(),
                     child: const Text('Close Account', style: TextStyle(color: Colors.red),),
                   ),
                 )
