@@ -28,11 +28,11 @@ class TSortableProducts extends StatelessWidget {
           hint: const Text('Select category'),
         ),
         const SizedBox(height: TSizes.spaceBtwSections),
-        TGridViewLayout(
-            itemCount: 10,
-            itemBuilder: (_, index) {
-              return const TProductCartVertical();
-            })
+        // TGridViewLayout(
+        //     itemCount: 10,
+        //     itemBuilder: (_, index) {
+        //       return const TProductCartVertical();
+        //     })
       ],
     );
   }
