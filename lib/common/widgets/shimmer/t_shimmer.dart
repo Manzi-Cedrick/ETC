@@ -13,8 +13,8 @@ class TShimmerEffect extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return Shimmer.fromColors(
-      baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
-      highlightColor: dark ? Colors.grey[700]! : Colors.grey[100]!,
+      baseColor: dark ? Colors.grey[700]! : Colors.grey[400]!,
+      highlightColor: dark ? Colors.grey[700]! : Colors.grey[50]!,
       child: Container(
         width: width,
         height: height,
