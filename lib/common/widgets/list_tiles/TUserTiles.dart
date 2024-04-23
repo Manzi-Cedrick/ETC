@@ -1,3 +1,4 @@
+import 'package:etrade_actions/common/widgets/shimmer/t_shimmer.dart';
 import 'package:etrade_actions/features/personalization/controllers/user_controller.dart';
 import 'package:etrade_actions/features/personalization/screens/profile/profile.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
@@ -14,11 +15,23 @@ class TUserTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     return ListTile(
-      leading: const TRoundedImage(
-        image: TImages.user,
-        width: 50,
-        height: 50,
-        padding: 0,
+      leading: Obx(
+        () {
+          final networkImage = controller.user.value.profilePicture;
+          final image = networkImage.isNotEmpty ? networkImage : TImages.user;
+          return controller.imageUploading.value
+              ? const TShimmerEffect(
+                  width: 50,
+                  height: 50,
+                  radius: 80,
+                )
+              : TRoundedImage(
+                  image: image,
+                  isNetworkImage: networkImage.isNotEmpty ? true : false,
+                  radius: 80,
+                  applyImageRadius: true,
+                );
+        },
       ),
       title: Text(
         controller.user.value.fullName,

@@ -1,5 +1,6 @@
 import 'package:etrade_actions/common/widgets/brands/TBrandShowcase.dart';
 import 'package:etrade_actions/common/widgets/product/product_cards/product_card_vertical.dart';
+import 'package:etrade_actions/features/shop/models/category_model.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
@@ -7,8 +8,9 @@ import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class TCategoryTab extends StatelessWidget {
-  const TCategoryTab({super.key});
+  const TCategoryTab({super.key, required this.categoryModel});
 
+  final CategoryModel categoryModel;
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -32,11 +34,11 @@ class TCategoryTab extends StatelessWidget {
                     title: 'You might like', onButtonPressed: () {}),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                TGridViewLayout(
-                  itemCount: 4,
-                  mainAxisExtent: 280,
-                  itemBuilder: (_, index) => const TProductCartVertical(),
-                ),
+                // TGridViewLayout(
+                //   itemCount: 4,
+                //   mainAxisExtent: 280,
+                //   itemBuilder: (_, index) => TProductCartVertical(product: product,),
+                // ),
 
                 
               ],

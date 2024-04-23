@@ -1,9 +1,12 @@
 import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
 import 'package:etrade_actions/common/widgets/texts/product_title_text.dart';
 import 'package:etrade_actions/common/widgets/icon/circular_icon.dart';
+import 'package:etrade_actions/features/shop/controllers/product_controller.dart';
+import 'package:etrade_actions/features/shop/models/product_model.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/features/shop/screens/product_details/product_detail.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
+import 'package:etrade_actions/utils/constants/enums.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/shadow.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
@@ -13,13 +16,19 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TProductCartVertical extends StatelessWidget {
-  const TProductCartVertical({super.key});
+  const TProductCartVertical({super.key, required this.product});
 
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage =
+        controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(const ProductDetail()),
+      onTap: () => Get.to(() => ProductDetail(
+            product: product,
+          )),
       child: Container(
         height: double.infinity,
         width: double.infinity,
@@ -37,10 +46,11 @@ class TProductCartVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   TRoundedImage(
-                    image: TImages.productImage1,
+                    image: product.thumbnail,
                     onTap: () {},
                     height: 140,
                     width: 600,
+                    isNetworkImage: true,
                     fit: BoxFit.contain,
                     radius: TSizes.sm,
                   ),
@@ -54,7 +64,7 @@ class TProductCartVertical extends StatelessWidget {
                         padding: const EdgeInsets.all(TSizes.sm - 2),
                         child: Center(
                           child: Text(
-                            '25%',
+                            '$salePercentage',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall!
@@ -74,8 +84,12 @@ class TProductCartVertical extends StatelessWidget {
                             : TColors.light.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child:
-                          TCicularIcon(icon: Iconsax.heart5, color: Colors.red, onPressed: () {}, backgroundColor: TColors.white.withOpacity(0.5),),
+                      child: TCicularIcon(
+                        icon: Iconsax.heart5,
+                        color: Colors.red,
+                        onPressed: () {},
+                        backgroundColor: TColors.white.withOpacity(0.5),
+                      ),
                     ),
                   )
                 ],
@@ -88,8 +102,8 @@ class TProductCartVertical extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TProductTitleText(
-                    title: 'Green Nike Air Shoes',
+                  TProductTitleText(
+                    title: product.title,
                     smallSize: true,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -99,7 +113,7 @@ class TProductCartVertical extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Nike',
+                        product.brand!.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: Theme.of(context)
@@ -121,14 +135,26 @@ class TProductCartVertical extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '\$120',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .apply(color: TColors.primary),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            if (product.productType ==
+                                    ProductType.single.toString() &&
+                                product.salePrice > 0)
+                              Padding(
+                                padding: const EdgeInsets.only(left: TSizes.sm),
+                                child: Text(
+                                  'USD ${product.salePrice.toString()}',
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                ),
+                              ), // Text
+                            Padding(
+                              padding: const EdgeInsets.only(left: TSizes.sm),
+                              child: Text('USD ${controller.getProductPrice(product)}'),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         decoration: const BoxDecoration(
