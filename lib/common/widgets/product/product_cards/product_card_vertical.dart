@@ -7,7 +7,6 @@ import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularConta
 import 'package:etrade_actions/features/shop/screens/product_details/product_detail.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/enums.dart';
-import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/shadow.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
@@ -64,7 +63,7 @@ class TProductCartVertical extends StatelessWidget {
                         padding: const EdgeInsets.all(TSizes.sm - 2),
                         child: Center(
                           child: Text(
-                            '$salePercentage',
+                            '$salePercentage %',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall!
@@ -144,15 +143,12 @@ class TProductCartVertical extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: TSizes.sm),
                                 child: Text(
-                                  'USD ${product.salePrice.toString()}',
+                                  '\$${product.salePrice.toString()}',
                                   style:
                                       Theme.of(context).textTheme.labelMedium,
                                 ),
                               ), // Text
-                            Padding(
-                              padding: const EdgeInsets.only(left: TSizes.sm),
-                              child: Text('USD ${controller.getProductPrice(product)}'),
-                            ),
+                            Text('\$${controller.getProductPrice(product)}'),
                           ],
                         ),
                       ),
