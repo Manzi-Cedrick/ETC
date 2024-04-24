@@ -11,13 +11,14 @@ import 'package:etrade_actions/utils/helpers/network_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
   Rx<UserModel> user = UserModel.empty().obs;
   final userRepository = Get.put(UserRepository());
   final profileLoading = false.obs;
-
+  final imageUploading = false.obs;
   final hidePassword = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
@@ -44,24 +45,29 @@ class UserController extends GetxController {
   }
 
   Future<void> saveUserRecord(UserCredential? userCredential) async {
+    await fetchUserRecord();
+
     try {
-      if (userCredential != null) {
-        final nameparts =
-            UserModel.nameParts(userCredential.user!.displayName!);
-        final username =
-            UserModel.generateUsername(userCredential.user?.displayName ?? '');
+      if (user.value.id.isEmpty) {
+        if (userCredential != null) {
+          final nameparts =
+              UserModel.nameParts(userCredential.user!.displayName!);
+          final username = UserModel.generateUsername(
+              userCredential.user?.displayName ?? '');
 
-        final user = UserModel(
-          id: userCredential.user!.uid,
-          firstName: nameparts[0],
-          lastName: nameparts.length > 1 ? nameparts.sublist(1).join(' ') : '',
-          username: username,
-          email: userCredential.user!.email ?? '',
-          phoneNumber: userCredential.user!.phoneNumber ?? '',
-          profilePicture: userCredential.user!.photoURL ?? '',
-        );
+          final user = UserModel(
+            id: userCredential.user!.uid,
+            firstName: nameparts[0],
+            lastName:
+                nameparts.length > 1 ? nameparts.sublist(1).join(' ') : '',
+            username: username,
+            email: userCredential.user!.email ?? '',
+            phoneNumber: userCredential.user!.phoneNumber ?? '',
+            profilePicture: userCredential.user!.photoURL ?? '',
+          );
 
-        await userRepository.saveUserRecord(user);
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       TLoaders.warningSnackBar(
@@ -94,7 +100,7 @@ class UserController extends GetxController {
 
   void deleteUserAccount() async {
     try {
-      TFullScreenLoader.openLoadingDialog('Processing', TImages.animalIcon);
+      TFullScreenLoader.openLoadingDialog('Processing', TImages.docerAnimation);
 
       final auth = AuthenticationRepository.instance;
       final provider =
@@ -119,7 +125,8 @@ class UserController extends GetxController {
 
   Future<void> reAuthenticateEmailAndPasswordUser() async {
     try {
-      TFullScreenLoader.openLoadingDialog('Proccessing', TImages.animalIcon);
+      TFullScreenLoader.openLoadingDialog(
+          'Proccessing', TImages.docerAnimation);
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
@@ -131,13 +138,41 @@ class UserController extends GetxController {
         return;
       }
 
-      await AuthenticationRepository.instance.reAuthenticateWithEmailAndPassword(verifyEmail.text.trim(), verifyPassword.text.trim());
+      await AuthenticationRepository.instance
+          .reAuthenticateWithEmailAndPassword(
+              verifyEmail.text.trim(), verifyPassword.text.trim());
       await AuthenticationRepository.instance.deleteAccount();
       TFullScreenLoader.stopLoading();
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      TLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());      
+      TLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+      if (image != null) {
+        imageUploading.value = true;
+        final imageUrl =
+            await userRepository.uploadImage('Users/Images/Profile', image);
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSingleField(json);
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+        TLoaders.successSnackBar(
+            title: 'Congratulations',
+            message: 'Your profile picture has been updated');
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: 'Something went wrong $e');
+    } finally {
+      imageUploading.value = false;
     }
   }
 }
