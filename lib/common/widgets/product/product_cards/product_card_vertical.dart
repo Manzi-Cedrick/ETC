@@ -53,26 +53,27 @@ class TProductCartVertical extends StatelessWidget {
                     fit: BoxFit.contain,
                     radius: TSizes.sm,
                   ),
-                  Positioned(
-                    top: 10,
-                    left: 10,
-                    child: TRoundedContainer(
-                      radius: TSizes.sm,
-                      backgroundColor: TColors.secondary.withOpacity(0.8),
-                      child: Padding(
-                        padding: const EdgeInsets.all(TSizes.sm - 2),
-                        child: Center(
-                          child: Text(
-                            '$salePercentage %',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall!
-                                .apply(color: TColors.black),
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: TRoundedContainer(
+                        radius: TSizes.sm,
+                        backgroundColor: TColors.secondary.withOpacity(0.8),
+                        child: Padding(
+                          padding: const EdgeInsets.all(TSizes.sm - 2),
+                          child: Center(
+                            child: Text(
+                              '$salePercentage %',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .apply(color: TColors.black),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                   Positioned(
                     top: 0,
                     right: 0,
