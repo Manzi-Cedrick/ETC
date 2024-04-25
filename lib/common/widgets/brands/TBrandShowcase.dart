@@ -1,5 +1,6 @@
 import 'package:etrade_actions/common/widgets/brands/TBrands.dart';
 import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
+import 'package:etrade_actions/features/shop/models/brand_model.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
@@ -7,9 +8,10 @@ import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class TBrandCardShowcase extends StatelessWidget {
-  const TBrandCardShowcase({super.key, required this.images});
+  const TBrandCardShowcase({super.key, required this.images, required this.brandModel});
 
   final List<String> images;
+  final BrandModel brandModel;
   @override
   Widget build(BuildContext context) {
     return TRoundedContainer(
@@ -19,7 +21,7 @@ class TBrandCardShowcase extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Column(
         children: [
-          const TBrandCard(showBorder: true),
+          TBrandCard(showBorder: true, brand: brandModel,),
           Padding(
             padding: const EdgeInsets.symmetric(
                 vertical: TSizes.sm, horizontal: TSizes.md),
