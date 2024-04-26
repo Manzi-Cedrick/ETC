@@ -1,6 +1,7 @@
 import 'package:etrade_actions/common/widgets/custom_shapes/circular_container.dart';
+import 'package:etrade_actions/common/widgets/product/cart/product_add_cart_button.dart';
+import 'package:etrade_actions/common/widgets/product/favourite_icon/favourite_icon.dart';
 import 'package:etrade_actions/common/widgets/texts/product_title_text.dart';
-import 'package:etrade_actions/common/widgets/icon/circular_icon.dart';
 import 'package:etrade_actions/features/shop/controllers/product_controller.dart';
 import 'package:etrade_actions/features/shop/models/product_model.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
@@ -46,7 +47,7 @@ class TProductCartVertical extends StatelessWidget {
                 children: [
                   TRoundedImage(
                     image: product.thumbnail,
-                    onTap: () {},
+                    onTap: () => Get.to(() => ProductDetail(product: product)),
                     height: 140,
                     width: 600,
                     isNetworkImage: true,
@@ -77,20 +78,7 @@ class TProductCartVertical extends StatelessWidget {
                   Positioned(
                     top: 0,
                     right: 0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: dark
-                            ? TColors.dark.withOpacity(0.9)
-                            : TColors.light.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: TCicularIcon(
-                        icon: Iconsax.heart5,
-                        color: Colors.red,
-                        onPressed: () {},
-                        backgroundColor: TColors.white.withOpacity(0.5),
-                      ),
-                    ),
+                    child: TFavouriteIcon(productId: product.id),
                   )
                 ],
               ),
@@ -153,26 +141,8 @@ class TProductCartVertical extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: TColors.dark,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(TSizes.cardRadiusMd),
-                            bottomRight:
-                                Radius.circular(TSizes.productImageRadius),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          width: TSizes.iconLg * 1.2,
-                          height: TSizes.iconLg * 1.2,
-                          child: Center(
-                            child: Icon(
-                              Iconsax.add,
-                              color: TColors.white,
-                            ),
-                          ),
-                        ),
-                      )
+                      // Add to Cart
+                      ProductCardAddToCartButton(product: product)
                     ],
                   )
                 ],
