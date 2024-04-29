@@ -26,15 +26,15 @@ class TVerticalProductShimmer extends StatelessWidget {
               height: 180,
               color: Colors.grey[300],
             ),
-            SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: TSizes.spaceBtwItems),
             // Text
             TShimmerEffect(
               width: 160,
               height: 15,
               color: Colors.grey[300],
             ),
-            SizedBox(height: TSizes.spaceBtwItems / 2),
-            TShimmerEffect(
+            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            const TShimmerEffect(
               width: 110,
               height: 15,
             ),
