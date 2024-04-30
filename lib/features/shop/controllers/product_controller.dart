@@ -1,13 +1,17 @@
 import 'package:etrade_actions/common/widgets/loaders/loaders.dart';
+import 'package:etrade_actions/common/widgets/popups/full_screen_loader.dart';
 import 'package:etrade_actions/data/repositories/product/product_repository.dart';
 import 'package:etrade_actions/features/shop/models/product_model.dart';
 import 'package:etrade_actions/utils/constants/enums.dart';
+import 'package:etrade_actions/utils/constants/image_strings.dart';
+import 'package:etrade_actions/utils/helpers/network_manager.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
   static ProductController get instance => Get.find();
 
   final isLoading = false.obs;
+  final isUploadLoad = false.obs;
   final productRepository = Get.put(ProductRepository());
   RxList<ProductModel> featuredProducts = <ProductModel>[].obs;
   @override
@@ -19,13 +23,22 @@ class ProductController extends GetxController {
   void fetchFeaturedProducts() async {
     try {
       isLoading.value = true;
-
       final products = await productRepository.getFeaturedProducts();
       featuredProducts.assignAll(products);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final products = await productRepository.getFeaturedProducts();
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
+      return [];
     }
   }
 
@@ -71,8 +84,31 @@ class ProductController extends GetxController {
     return percentage.toStringAsFixed(0);
   }
 
-// Check Product Stock Status
   String getProductStockStatus(int stock) {
     return stock > 0 ? 'In Stock' : 'Out of Stock';
+  }
+
+  Future<void> uploadDummyData(List<ProductModel> products) async {
+    try {
+      isUploadLoad.value = true;
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      TFullScreenLoader.openLoadingDialog(
+          'Saving up data...', TImages.docerAnimation);
+      await productRepository.uploadDummyData(products);
+      isUploadLoad.value = false;
+      TFullScreenLoader.stopLoading();
+      TLoaders.successSnackBar(title: 'Success', message: 'Data uploaded');
+    } catch (e) {
+      isUploadLoad.value = false;
+      TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
+    } finally {
+      isUploadLoad.value = false;
+      TFullScreenLoader.stopLoading();
+    }
   }
 }
