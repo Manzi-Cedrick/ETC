@@ -1,3 +1,4 @@
+import 'package:etrade_actions/features/shop/controllers/cart_controller.dart';
 import 'package:etrade_actions/features/shop/controllers/image_controller.dart';
 import 'package:etrade_actions/features/shop/models/product_model.dart';
 import 'package:etrade_actions/features/shop/models/product_variation_model.dart';
@@ -26,6 +27,12 @@ class VariationController extends GetxController {
       ImageController.instance.selectedProductImage.value =
           selectedVariation.image;
     }
+
+    if (selectedVariation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController.getVariationQuantityInCart(product.id, selectedVariation.id);
+    }
+
 
     this.selectedVariation.value = selectedVariation;
 

@@ -1,10 +1,10 @@
-
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TSettingsMenuTile.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TUserTiles.dart';
 import 'package:etrade_actions/features/personalization/screens/address/address.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TPrimaryHeader.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
+import 'package:etrade_actions/features/shop/screens/load_data/load_data_screen.dart';
 import 'package:etrade_actions/features/shop/screens/order/order.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
@@ -26,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   TAppBar(
-                    showBackArrow: false,
+                      showBackArrow: false,
                       title: Text('Account',
                           style: Theme.of(context)
                               .textTheme
@@ -48,20 +48,21 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
                   TSettingsMenuTile(
-                      icon: Iconsax.safe_home,
-                      title: 'My Addresses',
-                      subTitle: 'Set shopping delivery address',
-                      onTap: () => Get.to(const UserAddressScreen()),),
+                    icon: Iconsax.safe_home,
+                    title: 'My Addresses',
+                    subTitle: 'Set shopping delivery address',
+                    onTap: () => Get.to(const UserAddressScreen()),
+                  ),
                   const TSettingsMenuTile(
                       icon: Iconsax.shopping_cart,
                       title: 'My Cart',
                       subTitle: 'Add, remove products and move to checkout'),
                   TSettingsMenuTile(
-                      icon: Iconsax.bag_tick,
-                      title: 'My Orders',
-                      subTitle: 'In progress and Completed orders',
-                      onTap: () => Get.to(const OrderScreen()),
-                    ),
+                    icon: Iconsax.bag_tick,
+                    title: 'My Orders',
+                    subTitle: 'In progress and Completed orders',
+                    onTap: () => Get.to(const OrderScreen()),
+                  ),
                   const TSettingsMenuTile(
                       icon: Iconsax.bank,
                       title: 'Bank Account',
@@ -82,10 +83,12 @@ class SettingsScreen extends StatelessWidget {
                   const TSectionHeading(
                       title: 'App Settings', showActionsButton: false),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  const TSettingsMenuTile(
-                      icon: Iconsax.document_upload,
-                      title: 'Load Data',
-                      subTitle: 'Upload data to your cloud firebase'),
+                  TSettingsMenuTile(
+                    icon: Iconsax.document_upload,
+                    title: 'Load Data',
+                    subTitle: 'Upload data to your cloud firebase',
+                    onTap: () => Get.to(() => LoadDataScreen()),
+                  ),
                   TSettingsMenuTile(
                       icon: Iconsax.location,
                       title: 'Geolocation',
