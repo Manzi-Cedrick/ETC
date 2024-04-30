@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -26,7 +24,9 @@ class TFirebaseStorageService extends GetxController {
     try {
       final ref = _firebaseStorage.ref(path).child(name);
       await ref.putData(image);
+      print(ref);
       final url = await ref.getDownloadURL();
+      print('The url: $url');
       return url;
     } catch (e) {
       if (e is FirebaseException) {
