@@ -58,10 +58,9 @@ class OrderController extends GetxController {
 
       cartController.clearCart();
       Get.off(
-        () => SucessScreen(
-            image: TImages.successAnimation,
+        () => const SucessScreen(
+            image: TImages.successfulPaymentIcon,
             title: 'Payment Success',
-            onPressed: () => Get.offAll(() => HomeScreen),
             subTitle: 'Your item will be shipped soon!'),
       );
     } catch (e) {
