@@ -1,19 +1,21 @@
 import 'package:etrade_actions/common/styles/spacing_styles.dart';
+import 'package:etrade_actions/features/shop/screens/home/home_screen.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/constants/text_strings.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SucessScreen extends StatelessWidget {
   const SucessScreen(
       { super.key,
       required this.image,
       required this.title,
-      required this.onPressed,
+      this.onPressed,
       required this.subTitle});
 
   final String image, title, subTitle;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,7 @@ class SucessScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: onPressed,
+                    onPressed: () => Get.off(const HomeScreen()),
                     child: const Text(TTexts.tContinue),
                   ),
                 ),
