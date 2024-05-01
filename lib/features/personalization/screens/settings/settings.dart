@@ -1,6 +1,8 @@
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TSettingsMenuTile.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TUserTiles.dart';
+import 'package:etrade_actions/data/repositories/auth/authentication_repository.dart';
+import 'package:etrade_actions/features/personalization/controllers/user_controller.dart';
 import 'package:etrade_actions/features/personalization/screens/address/address.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TPrimaryHeader.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
@@ -17,6 +19,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userController = Get.put(AuthenticationRepository());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -87,7 +90,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.document_upload,
                     title: 'Load Data',
                     subTitle: 'Upload data to your cloud firebase',
-                    onTap: () => Get.to(() => LoadDataScreen()),
+                    onTap: () => Get.to(() => const LoadDataScreen()),
                   ),
                   TSettingsMenuTile(
                       icon: Iconsax.location,
@@ -108,7 +111,7 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: () {}, child: const Text('Logout')),
+                        onPressed: () => userController.logout(), child: const Text('Logout')),
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections)
                 ],
