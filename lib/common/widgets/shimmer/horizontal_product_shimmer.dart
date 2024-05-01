@@ -39,7 +39,7 @@ class THorizontalProductShimmer extends StatelessWidget {
                 TShimmerEffect(width: 80, height: 15),
               ],
             ),
-            Spacer(),
+            // Spacer(),
           ],
         ),
       ),
