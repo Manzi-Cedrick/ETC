@@ -84,8 +84,19 @@ class LoginController extends GetxController {
       await userController.saveUserRecord(userCredentials);
 
       TFullScreenLoader.stopLoading();
+      AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+    }
+  }
+
+  // logout 
+  Future<void> logout() async {
+    try {
+      await AuthenticationRepository.instance.logout();
+      
+    } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }
