@@ -1,5 +1,7 @@
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
 import 'package:etrade_actions/common/widgets/brands/TBrands.dart';
+import 'package:etrade_actions/common/widgets/shimmer/brand_shimmer.dart';
+import 'package:etrade_actions/features/shop/controllers/brand_controller.dart';
 import 'package:etrade_actions/features/shop/screens/all_brands/brand_products.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
@@ -12,6 +14,7 @@ class AllBrands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brandController = BrandController.instance;
     return Scaffold(
         appBar: const TAppBar(
           title: Text('Brands'),
@@ -27,16 +30,30 @@ class AllBrands extends StatelessWidget {
                   showActionsButton: false,
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
-                TGridViewLayout(
-                  itemCount: 10,
-                  mainAxisExtent: 80,
-                  itemBuilder: (context, index) => TBrandCard(
-                    showBorder: true,
-                    onTap: () => Get.to(
-                      () => const BrandProducts(),
-                    ),
-                  ),
-                )
+                Obx(() {
+                  if (brandController.isLoading.value) return const TBrandsShimmer();
+
+                  if (brandController.featuredBrands.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No Data found!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .apply(color: Colors.white),
+                      ),
+                    );
+                  }
+
+                  return TGridViewLayout(
+                    itemCount: brandController.allBrands.length,
+                    mainAxisExtent: 80,
+                    itemBuilder: (_, index) {
+                      final brand = brandController.allBrands[index];
+                      return TBrandCard(showBorder: true, brand: brand, onTap: () => Get.to(() => BrandProducts(brandModel: brand,)),);
+                    },
+                  );
+                }),
               ],
             ),
           ),
