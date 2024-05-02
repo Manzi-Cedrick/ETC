@@ -56,7 +56,6 @@ class ProductRepository extends GetxController {
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
       final storage = Get.put(TFirebaseStorageService());
-      print('Products: $products');
       for (var product in products) {
         final thumbnail =
             await storage.getImageDataFromAssets(product.thumbnail);
@@ -64,7 +63,6 @@ class ProductRepository extends GetxController {
             'Products/Images', thumbnail, product.thumbnail.toString());
 
         product.thumbnail = url;
-        print(product.thumbnail);
         if (product.images != null && product.images!.isNotEmpty) {
           List<String> imageUrl = [];
 
@@ -91,7 +89,6 @@ class ProductRepository extends GetxController {
             variation.image = url;
           }
         }
-        print('Product: ${product.toJson()}');
         await _db.collection('Products').doc(product.id).set(product.toJson());
       }
     } on FirebaseException catch (e) {

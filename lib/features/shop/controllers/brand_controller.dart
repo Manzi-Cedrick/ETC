@@ -23,7 +23,6 @@ class BrandController extends GetxController {
     try {
       isLoading.value = true;
       final brands = await brandRepository.getAllBrands();
-      print('The brands: $brands');
       allBrands.assignAll(brands);
       featuredBrands.assignAll(
           allBrands.where((brand) => brand.isFeatured ?? false).take(4));

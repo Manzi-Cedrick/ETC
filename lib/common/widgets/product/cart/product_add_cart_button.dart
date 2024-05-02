@@ -18,7 +18,6 @@ class ProductCardAddToCartButton extends StatelessWidget {
     final controller = CartController.instance;
     return InkWell(
       onTap: () {
-        // print(product.productType);
         if (product.productType == ProductType.single.toString()) {
           final cartItem = controller.convertToCartItem(product, 1);
           controller.addOneToCart(cartItem);

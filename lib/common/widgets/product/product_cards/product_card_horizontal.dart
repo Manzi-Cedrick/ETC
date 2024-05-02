@@ -34,7 +34,7 @@ class TProductCardHorizontal extends StatelessWidget {
         children: [
           TRoundedContainer(
             radius: TSizes.md,
-            height: 120,
+            height: 80,
             padding: const EdgeInsets.all(TSizes.sm),
             backgroundColor: dark ? TColors.dark : TColors.light,
             child: Stack(
@@ -45,6 +45,7 @@ class TProductCardHorizontal extends StatelessWidget {
                   image: product.thumbnail,
                   applyImageRadius: true,
                   isNetworkImage: true,
+                  fit: BoxFit.contain,
                 ),
                 if (product.productType == ProductType.single.toString() &&
                     product.salePrice > 0)

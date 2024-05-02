@@ -126,8 +126,8 @@ class AddressController extends GetxController {
       context: context,
       builder: (context) => Container(
         padding: const EdgeInsets.all(TSizes.lg),
-        child: Expanded(
-          child: Column(
+        child: 
+           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TSectionHeading(title: 'Select Address', showActionsButton: false),
@@ -139,16 +139,18 @@ class AddressController extends GetxController {
                     return response;
                   }
         
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) => TSingleAddress(
-                      selectedAddress: snapshot.data![index].selectedAddress,
-                      addressModel: snapshot.data![index],
-                      onTap: () async {
-                        await selectAddress(snapshot.data![index]);
-                        Get.back();
-                      },
+                  return Flexible(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) => TSingleAddress(
+                        selectedAddress: snapshot.data![index].selectedAddress,
+                        addressModel: snapshot.data![index],
+                        onTap: () async {
+                          await selectAddress(snapshot.data![index]);
+                          Get.back();
+                        },
+                      ),
                     ),
                   );
                 },
@@ -163,7 +165,6 @@ class AddressController extends GetxController {
               )
             ],
           ),
-        ),
       ),
     );
   }

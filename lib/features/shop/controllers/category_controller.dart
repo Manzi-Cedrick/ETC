@@ -33,7 +33,6 @@ class CategoryController extends GetxController {
           .toList());
       isLoading.value = false;
     } catch (e) {
-      print(e.toString());
       TLoaders.errorSnackBar(
           title: 'Oh Snap', message: 'Something went wrong $e');
     } finally {
@@ -71,9 +70,13 @@ class CategoryController extends GetxController {
           'Saving up data...', TImages.docerAnimation);
       await _categoryRepository.uploadDummyData(categories);
       isUploadLoad.value = false;
+      TFullScreenLoader.stopLoading();
       TLoaders.successSnackBar(title: 'Success', message: 'Data uploaded');
     } catch (e) {
+      isLoading.value = false;
       TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
+    } finally {
+      isLoading.value = false;
     }
   }
 }
