@@ -1,4 +1,5 @@
 
+import 'package:etrade_actions/features/shop/models/product_model.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
 import 'package:etrade_actions/features/shop/screens/product_details/widgets/bottom_cart_navigation.dart';
 import 'package:etrade_actions/features/shop/screens/product_details/widgets/product_attributes.dart';
@@ -6,6 +7,7 @@ import 'package:etrade_actions/features/shop/screens/product_details/widgets/pro
 import 'package:etrade_actions/features/shop/screens/product_details/widgets/product_ratings_share.dart';
 import 'package:etrade_actions/features/shop/screens/product_details/widgets/product_slider.dart';
 import 'package:etrade_actions/features/shop/screens/product_reviews/product_review_screen.dart';
+import 'package:etrade_actions/utils/constants/enums.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,17 +15,18 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+  const ProductDetail({super.key,required this.product});
 
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const TBottomAddToCart(),
+      bottomNavigationBar: TBottomAddToCart(productModel: product,),
       body: SingleChildScrollView(
         child: Column(
           children: [
             /// Image Slider
-            const TProductImageSlider(),
+            TProductImageSlider(productModel: product),
 
             Padding(
               padding: const EdgeInsets.only(
@@ -35,28 +38,23 @@ class ProductDetail extends StatelessWidget {
                   // Rating * Share
                   const TRatingsAndShare(),
                   // Price and title
-                  const TProductMetaData(),
+                  TProductMetaData(productModel: product),
                   // Attribute
-                  const TProductAttributes(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(onPressed: () {}, child: const Text('Checkout')),
-                  ),
+                  if(product.productType == ProductType.variable.toString()) TProductAttributes(productModel: product),
+                  if(product.productType == ProductType.variable.toString()) const SizedBox(height: TSizes.spaceBtwSections),
 
                   const SizedBox(height: TSizes.spaceBtwItems),
 
-                  const TSectionHeading(title: 'Description', showActionsButton: false),
+                  TSectionHeading(title: product.title, showActionsButton: false),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  const ReadMoreText(
-                    'This is a product description for Blue Nike Sleeve less vest. There are more things that can be added as we gradually grow, we are eager to give service to our customers.',
+                  ReadMoreText(
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: 'Show more',
                     trimExpandedText: ' Less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                    lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   ),
 
                   // Reviews

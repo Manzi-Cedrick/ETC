@@ -1,5 +1,6 @@
 import 'package:etrade_actions/features/shop/screens/home/widgets/TListViewCategoryOption.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
+import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class THomeCategory extends StatelessWidget {
       child: Column(
         children: [
           TSectionHeading(
-              title: 'Popular Categories', showActionsButton: false),
+              title: 'Popular Categories', showActionsButton: false, textColor: TColors.white,),
           SizedBox(height: TSizes.spaceBtwItems),
           // Categories
           TListViewCategoryOption(),

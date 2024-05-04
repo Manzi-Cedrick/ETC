@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etrade_actions/common/widgets/product/product_cards/product_card_vertical.dart';
+import 'package:etrade_actions/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:etrade_actions/features/shop/controllers/product_controller.dart';
 import 'package:etrade_actions/features/shop/screens/all_products/all_products.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/THomeAppBar.dart';
@@ -17,6 +20,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -25,11 +29,12 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const THomeAppBar(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwItems),
                   TStoreSearch(
                     displayText: 'Search in store',
                     onTap: () {},
-                    padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: TSizes.defaultSpace),
                   ),
                   // Categories
                   const THomeCategory(),
@@ -52,11 +57,24 @@ class HomeScreen extends StatelessWidget {
                   TSectionHeading(
                     title: 'Popular Products',
                     showActionsButton: true,
-                    onButtonPressed: () => Get.to(() => const AllProducts()),
+                    onButtonPressed: () => Get.to(() => AllProducts(title: 'Popular Producs', query: FirebaseFirestore.instance.collection('Products').where('IsFeatured', isEqualTo: true).limit(6), futureMethod: controller.fetchAllFeaturedProducts(),)),
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  TGridViewLayout(itemCount: 6,mainAxisExtent: 280, itemBuilder: (_, index) {
-                    return const TProductCartVertical();
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const TVerticalProductShimmer();
+                    }
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                          child: Text('No Data Found!',
+                              style: Theme.of(context).textTheme.bodyMedium));
+                    }
+                    return TGridViewLayout(
+                        itemCount: controller.featuredProducts.length,
+                        mainAxisExtent: 280,
+                        itemBuilder: (_, index) {
+                          return TProductCartVertical(product: controller.featuredProducts[index],);
+                        });
                   })
                 ],
               ),
