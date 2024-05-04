@@ -1,3 +1,4 @@
+import 'package:etrade_actions/features/shop/screens/home/widgets/TCircularContainerImage.dart';
 import 'package:etrade_actions/utils/constants/colors.dart';
 import 'package:etrade_actions/utils/constants/sizes.dart';
 import 'package:etrade_actions/utils/helpers/helper_functions.dart';
@@ -9,10 +10,12 @@ class TVerticalCard extends StatelessWidget {
       required this.image,
       required this.title,
       this.backgroundColor,
+      this.isNetworkImage = true,
       this.onTap});
 
   final String image, title;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final VoidCallback? onTap;
 
   @override
@@ -35,10 +38,14 @@ class TVerticalCard extends StatelessWidget {
                       backgroundColor ?? (dark ? TColors.black : TColors.white),
                   borderRadius: BorderRadius.circular(100)),
               child: Center(
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  color: (dark ? TColors.light : TColors.dark),
+                child: TRoundedImage(
+                  image: image,
+                  fit: BoxFit.fitWidth,
+                  isNetworkImage: true,
+                  backgroundColor: backgroundColor,
+                  overlayColor: THelperFunctions.isDarkMode(context)
+                      ? TColors.light
+                      : TColors.dark,
                 ),
               ),
             ),
