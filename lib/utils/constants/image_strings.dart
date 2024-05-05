@@ -34,6 +34,7 @@ class TImages {
   static const String hermanMillerLogo = "assets/icons/brands/herman-miller-logo.png";
   static const String ikeaLogo = "assets/icons/brands/ikea_logo.png";
   static const String acerlogo = "assets/icons/brands/acer_logo.png";
+  static const String samsungLogo = "assets/icons/brands/samsung-logo.png";
 
   // -- Animations
   static const String productsIllustration = "assets/images/animations/sammy-line-workout.gif";
@@ -162,5 +163,11 @@ class TImages {
   static const String paystack = "assets/icons/payment_methods/paystack.png";
   static const String paytm = "assets/icons/payment_methods/paytm.png";
   static const String successfulPaymentIcon = "assets/icons/payment_methods/successful_payment_icon.png";
-}
 
+  // -- Animations
+  static const String docerAnimation = "assets/images/animations/141594-animation-of-docer.json";
+  static const String pencilAnimation = "assets/images/animations/140429-pencil-drawing.json";
+  static const String cartAnimation = "assets/images/animations/lady-adding-product-in-cart-animation.json";
+  static const String successAnimation = "assets/images/animations/order-complete-car-delivery-animation.json";
+  
+}
