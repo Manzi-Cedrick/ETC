@@ -1,9 +1,13 @@
 import 'package:etrade_actions/common/widgets/brands/TBrands.dart';
+import 'package:etrade_actions/common/widgets/shimmer/brand_shimmer.dart';
 import 'package:etrade_actions/common/widgets/tabs/TBottomTabBar.dart';
 import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
 import 'package:etrade_actions/common/widgets/product/cart/cart_counter_menu.dart';
 import 'package:etrade_actions/common/widgets/tabs/TCategoryTab.dart';
+import 'package:etrade_actions/features/shop/controllers/brand_controller.dart';
+import 'package:etrade_actions/features/shop/controllers/category_controller.dart';
 import 'package:etrade_actions/features/shop/screens/all_brands/all_brands.dart';
+import 'package:etrade_actions/features/shop/screens/all_brands/brand_products.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TGriedViewLayout.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSearchStore.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
@@ -18,8 +22,11 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brandController = Get.put(BrandController());
+    final categories = CategoryController.instance.featuredCategories;
+    
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: TAppBar(
           title:
@@ -60,38 +67,42 @@ class StoreScreen extends StatelessWidget {
                           TSectionHeading(
                               title: 'Featured Brandings',
                               showActionsButton: true,
-                              onButtonPressed: () => Get.to(() => const AllBrands())),
+                              onButtonPressed: () =>
+                                  Get.to(() => const AllBrands())),
                           const SizedBox(height: TSizes.spaceBtwItems / 1.5),
                           // Brandings
-                          TGridViewLayout(
-                            itemCount: 4,
-                            mainAxisExtent: 80,
-                            itemBuilder: (_, index) {
-                              return const TBrandCard(showBorder: true);
-                            },
-                          ),
+                          Obx(() {
+                            if (brandController.isLoading.value) return const TBrandsShimmer();
+
+                            if (brandController.featuredBrands.isEmpty) {
+                              return Center(
+                                child: Text('No Data found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),),
+                              );
+                            }
+
+                            return TGridViewLayout(
+                              itemCount: brandController.featuredBrands.length,
+                              mainAxisExtent: 80,
+                              itemBuilder: (_, index) {
+                                final brand = brandController.featuredBrands[index];
+                                return TBrandCard(showBorder: true,brand: brand, onTap: () => Get.to(() => BrandProducts(brandModel: brand)),);
+                              },
+                            );
+                          }),
                         ],
                       ),
                     ),
-                    bottom: const TBottomBar(
-                      tabs: [
-                        Tab(child: Text('Sports')),
-                        Tab(child: Text('Electronics')),
-                        Tab(child: Text('Fashion')),
-                        Tab(child: Text('Home')),
-                        Tab(child: Text('Beauty')),
-                      ],
+                    bottom: TBottomBar(
+                      tabs: categories
+                          .map((element) => Tab(child: Text(element.name)))
+                          .toList(),
                     ))
               ];
             },
-            body: const TabBarView(
-              children: [
-                TCategoryTab(),
-                TCategoryTab(),
-                TCategoryTab(),
-                TCategoryTab(),
-                TCategoryTab(),
-              ],
+            body: TabBarView(
+              children: categories
+                  .map((element) => TCategoryTab(categoryModel: element))
+                  .toList(),
             )),
       ),
     );
