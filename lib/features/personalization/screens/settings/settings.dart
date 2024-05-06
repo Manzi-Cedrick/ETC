@@ -2,7 +2,6 @@ import 'package:etrade_actions/common/widgets/appbar/appbar.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TSettingsMenuTile.dart';
 import 'package:etrade_actions/common/widgets/list_tiles/TUserTiles.dart';
 import 'package:etrade_actions/data/repositories/auth/authentication_repository.dart';
-import 'package:etrade_actions/features/personalization/controllers/user_controller.dart';
 import 'package:etrade_actions/features/personalization/screens/address/address.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TPrimaryHeader.dart';
 import 'package:etrade_actions/features/shop/screens/home/widgets/TSectionHeading.dart';
