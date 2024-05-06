@@ -7,7 +7,6 @@ import 'package:etrade_actions/features/shop/controllers/address_controller.dart
 import 'package:etrade_actions/features/shop/controllers/cart_controller.dart';
 import 'package:etrade_actions/features/shop/controllers/checkout_controller.dart';
 import 'package:etrade_actions/features/shop/models/order_model.dart';
-import 'package:etrade_actions/features/shop/screens/home/home_screen.dart';
 import 'package:etrade_actions/utils/constants/enums.dart';
 import 'package:etrade_actions/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
